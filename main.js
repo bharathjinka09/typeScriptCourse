@@ -45,12 +45,53 @@ let doLog = function (msg) {
 };
 // arrow functions
 let doLog1 = (msg) => console.log(msg);
-let drawPoint = (point) => {
-    //
-    console.log(point.x);
-    console.log(point.y);
-};
-drawPoint({
-    x: 1,
-    y: 2,
-});
+// custom fns
+// inline annotation
+// let drawPoint = (point: { x: number; y: number }) => {
+// }
+// cohesion
+// Things that are related should be a part of one unit
+// Class
+// Groups variables(properties) & functions(methods) that are highly related
+// interface (only for declarations, not for implementations)
+// defines the shape of a point object
+// interface Point {
+//   x: number;
+//   y: number;
+//   draw: () => void;
+// }
+class Point {
+    // constructor is a method which is called when we create an instance of a class i.e. object
+    constructor(_x, _y) {
+        this._x = _x;
+        this._y = _y;
+    }
+    //   access modifiers (public, private & protected)
+    // to control access to certain members of a class from the outside
+    // method
+    draw() {
+        console.log("drawing a point....");
+        console.log(`X: ${this._x}, Y: ${this._y}`);
+    }
+    // getter
+    get x() {
+        return this._x;
+    }
+    // setter
+    set x(value) {
+        if (value < 0) {
+            throw new Error("value should be greater than 0");
+        }
+        else {
+            this._x = value;
+        }
+    }
+}
+// object is instance of class
+let point = new Point(1, 2);
+// setting X
+point.x = 2;
+// getting X
+let x = point.x;
+console.log(x);
+point.draw();
